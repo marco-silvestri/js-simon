@@ -3,10 +3,24 @@ populateArrayRandomly(0, 100, randomGeneratedNumbers, 5);
 alert('Memorize these numbers: ' + randomGeneratedNumbers );
 var userNumberCollection = [];
 var victoryNumbers = [];
+var attemptMax = 5;
 
-setInterval(askForNumbers, 1000);
+setTimeout(function() {
+    askForNumbers(5)
+},0);
 
-alert('You have correctly guessed ' + victoryNumbers.length + ' numbers. They are ' + victoryNumbers )
+setTimeout(playTheGame, 30000);
+
+function playTheGame(){
+    checkerVictory(randomGeneratedNumbers,userNumberCollection);
+    if (victoryNumbers.length > 0){
+        alert('You have correctly guessed ' + victoryNumbers.length + ' numbers. They are ' + victoryNumbers );
+    }
+    else{
+        alert('Not even a correct guess, you have the memory of an hamster!');
+    }
+    
+}
 
 function checkerVictory(iaArray, userArray){
     for (var i = 0; i < iaArray.length; i++) {
@@ -16,9 +30,9 @@ function checkerVictory(iaArray, userArray){
     }
 };
 
-function askForNumbers(){
-    for (var attempt = 0; attempt < 5; attempt++){
-        var userNumber = sanitizeNumericalInput('You can still type ' + attempt + ' times.');
+function askForNumbers(maxAttempts){
+    for (var attempt = 0; attempt < maxAttempts; attempt++){
+        var userNumber = sanitizeNumericalInput('You can still type ' + (maxAttempts-attempt) + ' times.');
         userNumberCollection.push(userNumber);
     }
 };
