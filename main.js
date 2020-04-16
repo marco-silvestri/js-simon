@@ -1,11 +1,25 @@
+
+/****************
+*  Declarations *
+*****************/
+
 var randomGeneratedNumbers = []; 
-populateArrayRandomly(0, 100, randomGeneratedNumbers, 5);
-alert('Memorize these numbers: ' + randomGeneratedNumbers );
 var userNumberCollection = [];
 var victoryNumbers = [];
 var attemptMax = 5;
+var maxTime = 30000;
 
-setTimeout(playTheGame, 30000);
+/****************
+*   Game Logic  *
+*****************/
+
+populateArrayRandomly(0, 100, randomGeneratedNumbers, 5);
+alert('Memorize these numbers: ' + randomGeneratedNumbers );
+setTimeout(playTheGame, maxTime);
+
+/****************
+*   Functions   *
+*****************/
 
 //Ask for attemptMax n numbers, check for victory conditions (checkerVictory) and print an output
 function playTheGame(){
@@ -22,7 +36,7 @@ function playTheGame(){
 //Check if the user guessed number are in automatically populated array, if yes populate a new array with the results
 function checkerVictory(iaArray, userArray){
     for (var i = 0; i < iaArray.length; i++) {
-        if (iaArray[i] == userArray[i]){
+        if (iaArray.includes(userArray[i])){
             victoryNumbers.push(userArray[i]);
         }
     }
@@ -43,7 +57,7 @@ function populateArrayRandomly(min,max,arrayToPopulate,population) {
         randomNumber = randomGenie(min,max);
         if (!arrayToPopulate.includes(randomNumber)) {
             arrayToPopulate.push(randomNumber);
-        }
+            }
         } while (arrayToPopulate.length < population);
 };
 
